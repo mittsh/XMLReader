@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+@protocol RKSerialization;
+
 enum {
     XMLReaderOptionsProcessNamespaces           = 1 << 0, // Specifies whether the receiver reports the namespace and the qualified name of an element.
     XMLReaderOptionsReportNamespacePrefixes     = 1 << 1, // Specifies whether the receiver reports the scope of namespace declarations.
@@ -15,7 +17,7 @@ enum {
 };
 typedef NSUInteger XMLReaderOptions;
 
-@interface XMLReader : NSObject <NSXMLParserDelegate>
+@interface XMLReader : NSObject <RKSerialization>
 
 + (NSDictionary *)dictionaryForXMLData:(NSData *)data error:(NSError **)errorPointer;
 + (NSDictionary *)dictionaryForXMLString:(NSString *)string error:(NSError **)errorPointer;

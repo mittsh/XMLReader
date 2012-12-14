@@ -15,7 +15,7 @@
 NSString *const kXMLReaderTextNodeKey		= @"text";
 NSString *const kXMLReaderAttributePrefix	= @"@";
 
-@interface XMLReader ()
+@interface XMLReader () <NSXMLParserDelegate>
 
 @property (nonatomic, strong) NSMutableArray *dictionaryStack;
 @property (nonatomic, strong) NSMutableString *textInProgress;
@@ -54,6 +54,19 @@ NSString *const kXMLReaderAttributePrefix	= @"@";
     return [XMLReader dictionaryForXMLData:data options:options error:error];
 }
 
+
+#pragma mark - RKSerialization
+
++ (id)objectFromData:(NSData *)data error:(NSError **)error
+{
+	return [self dictionaryForXMLData:data error:error];
+}
+
++ (NSData *)dataFromObject:(id)object error:(NSError **)error
+{
+	NSAssert(@"XMLReader is as its names says, only a reader.", NO);
+	return nil;
+}
 
 #pragma mark - Parsing
 
